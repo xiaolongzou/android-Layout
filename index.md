@@ -1,7 +1,9 @@
 # Android 6大基本布局
 
 ### LinearLayout
-  属性：
+
+  常见属性：
+  
     orientation: 排列方式
     
     gravity：控制组件所包含的子元素的对齐方式。可多个组合比如center|bottom
@@ -41,6 +43,7 @@
 所有的子元素位置初始都是相对于原点
 
 常见属性：
+
      根据父容器定位
      
      1.layout_alignParentLeft 左对齐
