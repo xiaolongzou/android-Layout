@@ -1,8 +1,8 @@
-# Android 6大基本布局
+ # Android 6大基本布局
 
-github地址: https://github.com/xiaolongzou/Learn
+ github地址: https://github.com/xiaolongzou/Learn
 
-### LinearLayout
+ ### LinearLayout
 
   常见属性：
   
@@ -40,11 +40,11 @@ github地址: https://github.com/xiaolongzou/Learn
         
         实际使用中通过layout_weight去等比划分 一般将layout_height设置为0（orientation：vertical）
 
-### RelativeLayout
+ ### RelativeLayout
 
-所有的子元素位置初始都是相对于原点
+ 所有的子元素位置初始都是相对于原点
 
-常见属性：
+ 常见属性：
 
      根据父容器定位
      
@@ -84,5 +84,5 @@ github地址: https://github.com/xiaolongzou/Learn
 
      padding：设置组件内元素与父容器的间距
      
-### FrameLayout
+ ### FrameLayout
 
