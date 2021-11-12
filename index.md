@@ -1,4 +1,4 @@
-## Android 6大基本布局
+# Android 6大基本布局
 
 ### LinearLayout
 ### RelativeLayout
