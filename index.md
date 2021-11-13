@@ -157,6 +157,16 @@
 
     </TableLayout>
 
+### GridLayout
+   
+   和TableLayout类似但是不和TableRow一起使用
+   
+   属性
+   android:orientation="vertical" //垂直方向
+   android:rowCount="3" //垂直方向一行几个
+   android:orientation=""horizontal" //水平方向
+   android:columnCount="3" //水平方向时一列几个
+   
 
  
 
