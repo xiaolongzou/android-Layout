@@ -106,6 +106,8 @@
 
 ### TableLayout
 
+   可以理解为常用的表格
+
    常见属性：
         
         android:collapseColumns="0" //隐藏
