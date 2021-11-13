@@ -178,5 +178,10 @@
         android:layout_columnWeight="1"  //横向权重
         android:layout_rowWeight="1 " //纵向权重
 
+
+###  ConstraintLayout
+
+    对于ContraintLayout主要是对AS的Desgin工具的使用
+    通过拖拽来实现想要的效果
  
 
