@@ -162,11 +162,21 @@
    和TableLayout类似但是不和TableRow一起使用
    
    属性
-   android:orientation="vertical" //垂直方向
-   android:rowCount="3" //垂直方向一行几个
-   android:orientation=""horizontal" //水平方向
-   android:columnCount="3" //水平方向时一列几个
    
+      android:orientation="vertical" //垂直方向
+      android:rowCount="3" //垂直方向一行几个
+      android:orientation=""horizontal" //水平方向
+      android:columnCount="3" //水平方向时一列几个
+   
+   子控件属性
+   
+        android:layout_column="0" //第几列
+        android:layout_row="1" //第几行
+        android:layout_columnSpan="3" // 横向占几列，配合layout_gravity看效果
+        android:layout_rowSpan="3" // 横向占几列，配合layout_gravity看效果
+        android:layout_gravity="fill" 
+        android:layout_columnWeight="1"  //横向权重
+        android:layout_rowWeight="1 " //纵向权重
 
  
 
