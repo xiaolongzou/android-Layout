@@ -1,10 +1,10 @@
- # Android 6大基本布局
+# Android 6大基本布局
 
  github地址: https://github.com/xiaolongzou/Learn
 
- ### LinearLayout
+###  LinearLayout
 
-  常见属性：
+   常见属性：
   
     orientation: 排列方式
     
@@ -40,11 +40,11 @@
         
         实际使用中通过layout_weight去等比划分 一般将layout_height设置为0（orientation：vertical）
 
- ### RelativeLayout
+###  RelativeLayout
 
- 所有的子元素位置初始都是相对于原点
+   所有的子元素位置初始都是相对于原点
 
- 常见属性：
+   常见属性：
 
      根据父容器定位
      
@@ -84,5 +84,77 @@
 
      padding：设置组件内元素与父容器的间距
      
- ### FrameLayout
+###  FrameLayout
+   
+   FrameLayout是从原点开始绘制，后面的覆盖前面的子View
+   
+       <FrameLayout
+           xmlns:android="http://schemas.android.com/apk/res/android"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <FrameLayout
+               android:background="#ffff00"
+               android:layout_width="500dp"
+               android:layout_height="500dp"/>
+           <FrameLayout
+               android:foregroundGravity="right|bottom"
+               android:foreground="@mipmap/ic_launcher"
+               android:background="#ff0000"
+               android:layout_width="300dp"
+               android:layout_height="300dp"/>
+       </FrameLayout>
+
+### TableLayout
+
+   常见属性：
+        
+        android:collapseColumns="0" //隐藏
+        android:stretchColumns="1"  //拉伸
+        android:shrinkColumns="4 //收缩
+        
+   子控件设置属性：
+   
+      android:layout_column="2" //显示在第几列
+      android:layout_span="2"  //横向占几列
+  
+  xml:
+  
+    <TableLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:shrinkColumns="4"
+       xmlns:android="http://schemas.android.com/apk/res/android">
+
+      <TableRow>
+          <Button
+              android:text="第一个"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"/>
+          <Button
+              android:text="第二个"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"/>
+          <Button
+              android:text="第三个"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"/>
+          <Button
+              android:text="第四个"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"/>
+          <Button
+              android:text="第五个"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"/>
+      </TableRow>
+
+      <Button
+          android:text="@string/app_name"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"/>
+
+    </TableLayout>
+
+
+ 
 
