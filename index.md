@@ -272,7 +272,7 @@
       MainActivity里面的调用
       
       1.定义一个data，通过Bean方法为data加入数据；
-      2.调用findViewById去实例化ListView
+      2.调用findViewById去获取到ListView
       3.new一个MyAdapter去为listView设置适配器（setAdapter）；
       4.为listView添加点击事件setOnItemClickListener
       
@@ -304,3 +304,143 @@
       
 
 #  recyclerView
+
+   相比于ListView，recyclerView更加的灵活，实现的效果更多
+   
+   recyclerView的使用，需要先在build.gradle加入
+   
+     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+     
+  类Bean同ListView
+  
+  类MyAdapter
+  1.和ListView不同，recyclerView继承RecyclerView.Adapter<MyAdapter.MyViewHodler>, 让我们在
+  继承Adapter的时候去实现MyAdapter的时候去创建一个MyViewHolder，来进行性能优化
+  2.MyViewHolder需要继承RecyclerView.ViewHolder，定义一个私有变量TextView textview以及实现构造方法MyViewHolder，
+  在MyViewHolder里面通过findViewById去拿到textview，
+  3.创建构造方法同ListView的Adapter
+  4.onCreateViewHolder方法： 创建ViewHolder 
+  5.onBindViewHolder: 绑定数据
+  
+  
+  public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+
+    private List<Bean> data;
+    private Context context;
+
+    public MyAdapter(List<Bean> data, Context context) {
+        this.data = data;
+        this.context = context;
+
+    }
+
+    @NonNull
+    @Override
+    public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = View.inflate(context, R.layout.item, null);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
+        holder.textView.setText(data.get(position).getName());
+    }
+
+    @Override
+    public int getItemCount() {
+        return data == null ? 0 : data.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView textView;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textView = itemView.findViewById(R.id.tv);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onRecyclerItemClickListener != null) {
+                        onRecyclerItemClickListener.onRecyclerItemClick(getAdapterPosition());
+                    }
+                }
+            });
+        }
+    }
+
+    private  OnRecyclerItemClickListener onRecyclerItemClickListener;
+
+    public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener) { //定义一个设置监听的方法
+        onRecyclerItemClickListener = listener;
+    }
+
+    public  interface OnRecyclerItemClickListener { //创建一个监听接口
+        void onRecyclerItemClick(int position);
+    }
+}
+
+MainActivity：
+  
+         public class MainActivity extends AppCompatActivity {
+
+           private List<Bean> data = new ArrayList<>();
+
+           @Override
+           protected void onCreate(Bundle savedInstanceState) {
+               super.onCreate(savedInstanceState);
+               setContentView(R.layout.activity_main);
+               for (int i = 9000; i < 20000; i ++) {
+                   if (i % 4 != 0) {
+                       continue;
+                   }
+                   Bean bean = new Bean();
+                   bean.setName("可惜"+ i);
+                   data.add(bean);
+               }
+
+               RecyclerView recyclerView = findViewById(R.id.lv);
+
+               //线性布局
+       //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+       //        recyclerView.setLayoutManager(linearLayoutManager);
+
+               //网格布局
+       //        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+       //        recyclerView.setLayoutManager(gridLayoutManager);
+
+               //瀑布流布局
+               StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, LinearLayout.VERTICAL);
+               recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
+               MyAdapter myAdapter = new MyAdapter(data, this);
+               recyclerView.setAdapter(myAdapter);
+
+               myAdapter.setOnRecyclerItemClickListener(new MyAdapter.OnRecyclerItemClickListener() {
+                   @Override
+                   public void onRecyclerItemClick(int position) {
+                       Log.d("itemClick", "position"+ position);
+                   }
+               });
+           }
+       }
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
