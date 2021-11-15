@@ -272,9 +272,14 @@
       MainActivity里面的调用
       
       1.定义一个data，通过Bean方法为data加入数据；
+      
       2.调用findViewById去获取到ListView
+      
       3.new一个MyAdapter去为listView设置适配器（setAdapter）；
+      
       4.为listView添加点击事件setOnItemClickListener
+      
+      
       
       public class MainActivity extends AppCompatActivity {
 
@@ -314,16 +319,25 @@
   类Bean同ListView
   
   类MyAdapter
+  
   1.和ListView不同，recyclerView继承RecyclerView.Adapter<MyAdapter.MyViewHodler>, 让我们在
   继承Adapter的时候去实现MyAdapter的时候去创建一个MyViewHolder，来进行性能优化
-  2.MyViewHolder需要继承RecyclerView.ViewHolder，定义一个私有变量TextView textview以及实现构造方法MyViewHolder，
+  
+  2.MyViewHolder需要继承RecyclerView.ViewHolder，创建一个TextView textview以及实现构造方法MyViewHolder，
   在MyViewHolder里面通过findViewById去拿到textview，
+  
   3.创建构造方法同ListView的Adapter
+  
   4.onCreateViewHolder方法： 创建ViewHolder 
+  
   5.onBindViewHolder: 绑定数据
   
+  6.因为RecyclerView没有设置监听的方法，需要我们在MyAdapter去自己实现，首先创建一个接口及接口对象
   
-  public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+  7.实现onRecyclerItemClick的回调，通过为itemView设置setOnClickListener实现；
+  
+  
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private List<Bean> data;
     private Context context;
@@ -376,10 +390,10 @@
         onRecyclerItemClickListener = listener;
     }
 
-    public  interface OnRecyclerItemClickListener { //创建一个监听接口
+    public  interface OnRecyclerItemClickListener { //创建一个接口
         void onRecyclerItemClick(int position);
     }
-}
+    }
 
 MainActivity：
   
