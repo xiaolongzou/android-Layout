@@ -1,46 +1,38 @@
 # ViewPager
 
-    废话不多说直接上代码
-    
-    首先是MainActivity：
-      
-      我们通过LayoutInflater拿到我们的3个view并将其放到viewList里面，然后findViewById拿到viewPager，创建一个myAdapter，
-      然后将其设置给我viewPager
-      
+### MainActivity：
+
             public class MainActivity extends AppCompatActivity {
 
                 @Override
                 protected void onCreate(Bundle savedInstanceState) {
                     super.onCreate(savedInstanceState);
                     setContentView(R.layout.activity_main);
-
+                    
+                    //我们通过LayoutInflater拿到我们的3个view并将其放到viewList里面，然后findViewById拿到viewPager，创建一个myAdapter，然后将其设置给我viewPager
                     LayoutInflater layoutInflater = getLayoutInflater().from(this);
                     View view1 = layoutInflater.inflate(R.layout.layout, null);
                     View view2 = layoutInflater.inflate(R.layout.layout1, null);
                     View view3 = layoutInflater.inflate(R.layout.layout2, null);
-
-
+                    
                     List<View> viewList = new ArrayList<>();
                     viewList.add(view1);
                     viewList.add(view2);
                     viewList.add(view3);
-
+                    
                     ViewPager viewPager = findViewById(R.id.vp);
                     MyAdapter myAdapter = new MyAdapter(viewList);
                     viewPager.setAdapter(myAdapter);
                 }
             }
-
-      MyAdapter的实现：
-      
-        MyAdapter继承PagerAdapter，通过构造函数拿到我们的view数据
-         
-              
-             public class MyAdapter extends PagerAdapter {
+            
+### MyAdapter的实现：
+                  
+             public class MyAdapter extends PagerAdapter {    // MyAdapter继承PagerAdapter，
 
                 private List<View> mListView;
 
-                public MyAdapter(List<View> mListView) {  //构造函数
+                public MyAdapter(List<View> mListView) {  //通过构造函数拿到我们的view数据
                     this.mListView = mListView;
                 }
 
