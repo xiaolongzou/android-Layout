@@ -1,4 +1,4 @@
-# Android 6大基本布局
+# Android 基本布局
 
  github地址: https://github.com/xiaolongzou/Learn
 
@@ -184,4 +184,123 @@
     对于ContraintLayout主要是对AS的Desgin工具的使用
     通过拖拽来实现想要的效果
  
+#  listView
+   
+   新建类Bean，myAdapter
+   
+     Bean：
+     
+     package com.example.mylistview;
+      public class Bean {
+          String name;
 
+          public String getName() {
+              return name;
+          }
+
+          public void setName(String name) {
+              this.name = name;
+          }
+      }
+      
+      myAdapter：
+      
+      1.继承BaseAdapter；
+      2.定义私有变量data和context；
+      3.实现构造方法，用来获取data和context
+      4.重写getCount 一个都是data.size();
+      5.getItemId 修改为return position；
+      6.重写getView方法 定义一个ViewHolder类去存储textView，使用viewHolder能够避免每次渲染都是去调用findViewById，以便减少性能消耗
+      
+      
+      package com.example.mylistview;
+      import android.content.Context;
+      import android.view.LayoutInflater;
+      import android.view.View;
+      import android.view.ViewGroup;
+      import android.widget.BaseAdapter;
+      import android.widget.TextView;
+
+      import java.util.List;
+
+      public class MyAdapter extends BaseAdapter {
+
+
+          private List<Bean> data;
+          private Context context;
+
+          public MyAdapter(List<Bean> data, Context context) {
+              this.data = data;
+              this.context = context;
+          }
+
+          @Override
+          public int getCount() {
+              return data.size();
+          }
+
+          @Override
+          public Object getItem(int position) {
+              return null;
+          }
+
+          @Override
+          public long getItemId(int position) {
+              return position;
+          }
+
+          @Override
+          public View getView(int position, View convertView, ViewGroup parent) {
+              ViewHolder viewHolder;
+              if (convertView == null) {
+                  viewHolder = new ViewHolder();
+                  convertView = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
+                  viewHolder.textView = convertView.findViewById(R.id.tv);
+                  convertView.setTag(viewHolder);
+              } else {
+                  viewHolder = (ViewHolder) convertView.getTag();
+              }
+              viewHolder.textView.setText(data.get(position).getName());
+              return  convertView;
+          }
+
+          private  final class ViewHolder {
+              TextView textView;
+          }
+      }
+      
+      MainActivity里面的调用
+      
+      1.定义一个data，通过Bean方法为data加入数据；
+      2.调用findViewById去实例化ListView
+      3.new一个MyAdapter去为listView设置适配器（setAdapter）；
+      4.为listView添加点击事件setOnItemClickListener
+      
+      public class MainActivity extends AppCompatActivity {
+
+      private List<Bean> data = new ArrayList<>();
+
+       @Override
+       protected void onCreate(Bundle savedInstanceState) {
+           super.onCreate(savedInstanceState);
+           setContentView(R.layout.activity_main);
+
+           for (int i= 0; i < 100; i++) {
+               Bean bean = new Bean();
+               bean.setName("legendary" + i);
+               data.add(bean);
+           }
+           ListView listView = findViewById(R.id.lv);
+           listView.setAdapter(new MyAdapter(data, this));
+
+           listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+               @Override
+               public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                   Log.d("OnItemClick", "position" + position);
+               }
+           });
+       }
+      }
+      
+
+#  recyclerView
