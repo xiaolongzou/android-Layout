@@ -1,6 +1,8 @@
-# Android 基本布局
+# Android 基本知识
 
  github地址: https://github.com/xiaolongzou/Learn
+ 
+## Android 基本布局
 
 ###  LinearLayout
 
@@ -184,7 +186,7 @@
     对于ContraintLayout主要是对AS的Desgin工具的使用
     通过拖拽来实现想要的效果
  
-#  listView
+##  listView
    
    新建类Bean，myAdapter
    
@@ -308,7 +310,7 @@
       }
       
 
-#  recyclerView
+##  recyclerView
 
    相比于ListView，recyclerView更加的灵活，实现的效果更多
    
@@ -440,7 +442,7 @@ MainActivity：
            }
        }
 
-#   单位与尺寸
+##   单位与尺寸
 
 ###  px和pt的区别
   
