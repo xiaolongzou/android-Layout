@@ -440,7 +440,39 @@ MainActivity：
            }
        }
 
+#   单位与尺寸
 
+###  px和pt的区别
+  
+   px（像素）：不同设备显示效果相同
+   
+   pt： point，是一个标准的长度单位 1pt = 1/72英寸，用于印刷业，非常简单易用
+   
+### dp和sp的作用
+  
+  dp：即dip，device independent pixels（设备独立像素），不同设备显示不同的效果，这个和设备硬件有关，一般我们为了支持WVGA HVGA和QVGA推荐使用这个，不依赖像素
+  
+  sp：scaled pixels（放大像素），主要用于字体best for textSize
+  
+### LayoutParams是什么
+
+   LayoutParams相当于一个layout的信息包，它封装了layout的高，宽，位置等信息。
+   
+   栗子：
+   
+      
+        LinearLayout linearLayout = new LinearLayout(this);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        linearLayout.setLayoutParams(layoutParams);
+
+        TextView textView = new TextView(this);
+        textView.setText("123123");
+        LinearLayout.LayoutParams textLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    //  textView.setLayoutParams(textLayoutParams);
+    //  linearLayout.addView(textView);
+        linearLayout.addView(textView, textLayoutParams);
+        
+        setContentView(linearLayout);
 
 
 
